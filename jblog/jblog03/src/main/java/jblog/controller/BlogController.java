@@ -1,4 +1,4 @@
-package jblog03.controller;
+package jblog.controller;
 
 import org.springframework.stereotype.Controller;
 
