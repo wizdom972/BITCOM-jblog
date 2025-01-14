@@ -51,6 +51,18 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="jblog.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<context:annotation-config />
 	<context:component-scan
 		base-package="jblog.controller" />
