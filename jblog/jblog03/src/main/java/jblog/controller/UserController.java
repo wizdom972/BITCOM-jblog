@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jblog.security.Auth;
 import jblog.service.UserService;
 import jblog.vo.UserVo;
 
@@ -40,6 +41,7 @@ public class UserController {
 		return "redirect:/user/joinsuccess";
 	}
 	
+	@Auth
 	@GetMapping("/joinsuccess")
 	public String joinSuccess() {
 		return "user/joinsuccess";

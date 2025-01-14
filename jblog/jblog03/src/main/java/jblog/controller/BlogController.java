@@ -31,12 +31,12 @@ public class BlogController {
 		// postId == 0L -> default postId로 set
 		System.out.println("BlogController.main(" + id + ", " + categoryId + ", " + postId + ")");
 		
-		return "blog/main";
+		return "blog/blog-main";
 	}
 	
 	// @Auth 달아줘야함~~
 	@RequestMapping("/admin")
 	public String adminDefault(@PathVariable("id") String id) {
-		return "blog/main";
+		return "blog/blog-main";
 	}
 }
