@@ -1,16 +1,28 @@
 package jblog.vo;
 
-public class PostVo {
-	private int id;
-	private String contents;
-	private String regDate;
-	private int categoryId;
+import java.time.LocalDateTime;
 
-	public int getId() {
+public class PostVo {
+	private Long id;
+	private String contents;
+	private LocalDateTime regDate;
+	private Long categoryId;
+	
+    public PostVo() {
+    }
+
+    public PostVo(Long id, String contents, LocalDateTime regDate, Long categoryId) {
+        this.id = id;
+        this.contents = contents;
+        this.regDate = regDate;
+        this.categoryId = categoryId;
+    }
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -22,19 +34,19 @@ public class PostVo {
 		this.contents = contents;
 	}
 
-	public String getRegDate() {
+	public LocalDateTime getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(String regDate) {
+	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
 
-	public int getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -43,5 +55,4 @@ public class PostVo {
 		return "PostVo [id=" + id + ", contents=" + contents + ", regDate=" + regDate + ", categoryId=" + categoryId
 				+ "]";
 	}
-
 }

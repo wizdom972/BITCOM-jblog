@@ -4,6 +4,14 @@ public class BlogVo {
 	private String blogId;
 	private String title;
 	private String profile;
+	
+	public BlogVo() {}
+	
+    public BlogVo(String blogId, String title, String profile) {
+        this.blogId = blogId;
+        this.title = title;
+        this.profile = profile;
+    }
 
 	public String getBlogId() {
 		return blogId;
@@ -33,5 +41,4 @@ public class BlogVo {
 	public String toString() {
 		return "BlogVo [blogId=" + blogId + ", title=" + title + ", profile=" + profile + "]";
 	}
-
 }

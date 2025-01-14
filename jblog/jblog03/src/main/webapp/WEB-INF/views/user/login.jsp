@@ -19,9 +19,17 @@
 			<li><a href="">로그아웃</a></li>
 			<li><a href="">내블로그</a></li>
 		</ul>
-		<form class="login-form">
+		<form class="login-form" method="post" action="${pageContext.request.contextPath }/user/auth">
       		<label>아이디</label> <input type="text" name="id">
       		<label>패스워드</label> <input type="text" name="password">
+      		
+      		<!-- 로그인 실패 시 -->
+      		<c:if test='${"fail" == result}'>
+				<p>
+					로그인이 실패 했습니다.
+				</p>
+			</c:if>
+      		
       		<input type="submit" value="로그인">
 		</form>
 	</div>

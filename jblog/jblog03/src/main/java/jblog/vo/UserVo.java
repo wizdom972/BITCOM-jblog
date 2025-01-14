@@ -33,5 +33,4 @@ public class UserVo {
 	public String toString() {
 		return "UserVo [id=" + id + ", name=" + name + ", password=" + password + "]";
 	}
-
 }
