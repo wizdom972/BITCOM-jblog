@@ -12,7 +12,7 @@
 	<select id="findById" parameterType="string" resultType="blogvo">
 	<![CDATA[
 		SELECT
-		blog_id, title, profile
+		blog_id AS blogId, title, profile
 		FROM blog
 		WHERE blog_id = #{id}
 	]]>

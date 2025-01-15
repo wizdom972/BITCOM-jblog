@@ -2,6 +2,7 @@ package jblog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,10 @@ public class AdminController {
 	
 	// 블로그 관리 기본 페이지
     @GetMapping("/basic")
-    public String adminBasic(@PathVariable("id") String id) {
+    public String adminBasic(@PathVariable("id") String id, Model model) {
+    	model.addAttribute("blog", blogService.getBlog(id));
+    	System.out.println("[AdminController.adminBasic()] blog: " + blogService.getBlog(id));
+    	
         return "blog/blog-admin-basic";
     }
 
@@ -52,6 +56,8 @@ public class AdminController {
             @RequestParam("logo-file") MultipartFile logoFile,
             HttpSession session) {
 
+    	System.out.println("[AdminController.updateProfile()] id: " + id);
+    	
         // 이미지 업로드 처리
         String profileUrl = fileUploadService.restore(logoFile);
 

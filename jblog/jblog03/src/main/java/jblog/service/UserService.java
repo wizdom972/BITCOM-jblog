@@ -31,7 +31,7 @@ public class UserService {
 		BlogVo blogVo = new BlogVo();
         blogVo.setBlogId(userVo.getId());
         blogVo.setTitle(userVo.getName() + "의 블로그");
-        blogVo.setProfile("/assets/images/default-profile.jpg"); // 기본 프로필 이미지 경로
+        blogVo.setProfile("/assets/images/spring-logo.jpg"); // 기본 프로필 이미지 경로
         blogRepository.insert(blogVo);
         
         // 기본 카테고리 생성

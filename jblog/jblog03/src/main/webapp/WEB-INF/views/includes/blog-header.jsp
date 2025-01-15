@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div id="header">
-	<h1>Spring 이야기</h1>
+	<h1>${blog.title}</h1>
 	<ul>
 		<c:choose>
 			<%-- 비로그인 사용자 --%>
