@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD })
 public @interface Auth {
-	boolean required() default true;	// 인증 필요 여부 
-	boolean owner() default false;	// 본인 인지 확인
+	boolean required() default true; // 인증 필요 여부
+	boolean owner() default false; // 본인 인지 확인
 }
