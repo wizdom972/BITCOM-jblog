@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+	<insert id="insert" parameterType="postvo">
+		INSERT INTO post (title, contents, category_id, reg_date)
+		VALUES (#{title}, #{contents}, #{categoryId}, NOW())
+	</insert>
+
+	<select id="findByCategoryAndPost" parameterType="map"
+		resultType="postvo">
+		SELECT id, title, contents
+		FROM post
+		WHERE category_id = #{categoryId}
+		<if test="postId != null and postId != 0">
+			AND id = #{postId}
+		</if>
+	</select>
+</mapper>

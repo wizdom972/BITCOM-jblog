@@ -1,5 +1,7 @@
 package jblog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.FileUploadService;
 import jblog.vo.BlogVo;
+import jblog.vo.CategoryVo;
 
 @Auth(owner = true)
 @Controller
@@ -53,10 +56,16 @@ public class AdminController {
     }
 
     // 글쓰기 페이지
+    // 글쓰기 페이지에 카테고리 데이터 가져오기
     @GetMapping("/write")
     public String adminWrite(@PathVariable("id") String id, Model model) {
-    	
-        return "blog/blog-admin-write";
+        // 블로그 id에 속한 카테고리 목록 가져오기
+        List<CategoryVo> categories = categoryService.getCategoriesByBlogId(id);
+
+        // 모델에 카테고리 목록 추가
+        model.addAttribute("categories", categories);
+
+        return "blog/blog-admin-write"; // 글 작성 JSP 파일로 이동
     }
     
     // 블로그 설정 업데이트

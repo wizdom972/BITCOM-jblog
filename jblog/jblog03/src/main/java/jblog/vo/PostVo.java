@@ -4,19 +4,11 @@ import java.time.LocalDateTime;
 
 public class PostVo {
 	private Long id;
+	private String title;
 	private String contents;
 	private LocalDateTime regDate;
+	private String blogId;
 	private Long categoryId;
-	
-    public PostVo() {
-    }
-
-    public PostVo(Long id, String contents, LocalDateTime regDate, Long categoryId) {
-        this.id = id;
-        this.contents = contents;
-        this.regDate = regDate;
-        this.categoryId = categoryId;
-    }
 
 	public Long getId() {
 		return id;
@@ -24,6 +16,14 @@ public class PostVo {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getContents() {
@@ -41,6 +41,14 @@ public class PostVo {
 	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getBlogId() {
+		return blogId;
+	}
+
+	public void setBlogId(String blogId) {
+		this.blogId = blogId;
+	}
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -52,7 +60,7 @@ public class PostVo {
 
 	@Override
 	public String toString() {
-		return "PostVo [id=" + id + ", contents=" + contents + ", regDate=" + regDate + ", categoryId=" + categoryId
-				+ "]";
+		return "PostVo [id=" + id + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate
+				+ ", categoryId=" + categoryId + ", blogId=" + blogId + "]";
 	}
 }
