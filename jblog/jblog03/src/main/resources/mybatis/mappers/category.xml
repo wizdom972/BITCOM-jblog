@@ -9,4 +9,44 @@
 	]]>
 	</insert>
 
+	<select id="findByBlogId" parameterType="string"
+		resultType="categoryvo">
+	<![CDATA[
+		SELECT
+		id, name, description, blog_id AS blogId
+		FROM
+		category
+		WHERE
+		blog_id = #{blogId}
+		ORDER BY id DESC
+	]]>
+	</select>
+
+	<!-- 카테고리별 포스트 수 가져오기 -->
+	<select id="findCategoryWithPostCount" parameterType="string"
+		resultType="map">
+	<![CDATA[
+		SELECT
+		c.id AS id,
+		c.name AS name,
+		c.description AS description,
+		COUNT(p.id) AS postCount
+		FROM
+		category c
+		LEFT JOIN post p ON c.id = p.category_id
+		WHERE
+		c.blog_id = #{blogId}
+		GROUP BY
+		c.id
+		ORDER BY id DESC
+	]]>
+	</select>
+
+	<delete id="delete" parameterType="long">
+	<![CDATA[
+		DELETE FROM category
+		WHERE id = #{categoryId}
+	]]>
+	</delete>
+
 </mapper>

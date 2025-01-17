@@ -23,7 +23,29 @@
 	<mvc:default-servlet-handler />
 
 	<!-- Validator, ConversionService, MessageConverter를 자동으로 등록 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+	
+		<!-- Message Converter -->
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
 
 	<!-- DataSource(Connection Pool) -->
 	<bean id="dataSource"
@@ -72,7 +94,6 @@
 	<!-- mvc url-resource mapping -->
 	<mvc:resources mapping="/assets/upload-images/**"
 		location="file:/jblog-uploads/" />
-
 
 	<context:annotation-config />
 	<context:component-scan

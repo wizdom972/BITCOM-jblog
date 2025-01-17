@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 import jblog.security.Auth;
 import jblog.service.BlogService;
+import jblog.service.CategoryService;
 import jblog.service.FileUploadService;
 import jblog.vo.BlogVo;
 
@@ -27,24 +29,33 @@ public class AdminController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
+	@Autowired
+	private CategoryService categoryService;
+	
+    // 모든 관리 페이지에 blog 데이터를 추가
+    @ModelAttribute("blog")
+    public BlogVo getBlog(@PathVariable("id") String id) {
+        return blogService.getBlog(id);
+    }
+	
 	// 블로그 관리 기본 페이지
     @GetMapping("/basic")
     public String adminBasic(@PathVariable("id") String id, Model model) {
-    	model.addAttribute("blog", blogService.getBlog(id));
-    	System.out.println("[AdminController.adminBasic()] blog: " + blogService.getBlog(id));
-    	
         return "blog/blog-admin-basic";
     }
 
     // 카테고리 관리 페이지
     @GetMapping("/category")
-    public String adminCategory(@PathVariable("id") String id) {
+    public String adminCategory(@ModelAttribute("blog") BlogVo blog, Model model) {
+    	model.addAttribute("categories", categoryService.getCategoriesByBlogId(blog.getBlogId()));
+    	
         return "blog/blog-admin-category";
     }
 
     // 글쓰기 페이지
     @GetMapping("/write")
-    public String adminWrite(@PathVariable("id") String id) {
+    public String adminWrite(@PathVariable("id") String id, Model model) {
+    	
         return "blog/blog-admin-write";
     }
     
@@ -55,8 +66,6 @@ public class AdminController {
             @RequestParam("title") String title,
             @RequestParam("logo-file") MultipartFile logoFile,
             HttpSession session) {
-
-    	System.out.println("[AdminController.updateProfile()] id: " + id);
     	
         // 이미지 업로드 처리
         String profileUrl = fileUploadService.restore(logoFile);
