@@ -30,6 +30,6 @@ public class PostController {
             redirectAttributes.addFlashAttribute("message", "글 작성 중 문제가 발생했습니다.");
         }
         
-        return "redirect:/" + postVo.getCategoryId() + postVo.getId();
+        return "redirect:/" + postVo.getCategoryId() + "/" + postVo.getId();
     }
 }

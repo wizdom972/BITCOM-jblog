@@ -16,7 +16,7 @@ public class PostService {
 	
     // 글 작성
     public boolean createPost(PostVo postVo) {
-        return postRepository.insertPost(postVo) == 1;
+        return postRepository.insertPost(postVo) > 0;
     }
     
     public List<PostVo> getPostsByCategoryIdAndPostId(Long categoryId, Long postId) {
