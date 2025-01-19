@@ -24,9 +24,11 @@
                 	
                     $("#categoryTable").find("tr:gt(0)").remove(); // 기존 목록 삭제
                     
+                    var index = 1; // 카테고리 번호용
                     categories.forEach(function (category) {
                     	const description = category.description || "";
-                    	const isNotDefaultCategory = category.id !== 1; // 기본 카테고리가 아닌지 확인
+                    	const isNotDefaultCategory = category.name != "기본 카테고리"; // 기본 카테고리가 아닌지 확인
+                    	
                     	
                     	let deleteButtonHtml = "";
                     	if (isNotDefaultCategory) {
@@ -43,7 +45,7 @@
                     	
                         $("#categoryTable").append(`
                             <tr data-id=${"${category.id}"}>
-                                <td>${"${category.id}"}</td>
+                                <td>${"${index++}"}</td>
                                 <td>${"${category.name}"}</td>
                                 <td>${"${category.postCount}"}</td>
                                 <td>${"${description}"}</td>

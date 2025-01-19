@@ -21,7 +21,7 @@ import jblog.vo.CategoryVo;
 @RestController("categoryApiController")
 @RequestMapping("/api/category")
 public class CategoryController {
-	final Long DEFAULT_CATEGORY_ID = 1L;
+	final String DEFAULT_CATEGORY_NAME = "기본 카테고리";
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -49,7 +49,7 @@ public class CategoryController {
     public Map<String, Object> deleteCategory(@PathVariable("categoryId") Long categoryId) {
         
     	// 기본 카테고리는 삭제 불가
-    	if (categoryId.equals(DEFAULT_CATEGORY_ID)) {
+    	if (categoryService.getCategoryNameByCategoryId(categoryId).equals(DEFAULT_CATEGORY_NAME)) {
             return Map.of("success", false, "message", "기본 카테고리는 삭제할 수 없습니다.");
         }
     	

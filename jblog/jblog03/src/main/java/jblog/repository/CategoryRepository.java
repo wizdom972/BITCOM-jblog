@@ -31,7 +31,8 @@ public class CategoryRepository {
         return sqlSession.delete("category.delete", categoryId) > 0;
     }
 
-	public Object findById(Long categoryId) {
+	public CategoryVo findById(Long categoryId) {
 		return sqlSession.selectOne("category.findById", categoryId);
 	}
+	
 }

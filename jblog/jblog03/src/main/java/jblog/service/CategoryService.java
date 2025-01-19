@@ -26,6 +26,10 @@ public class CategoryService {
         return categoryRepository.findCategoryWithPostCount(blogId);
     }
     
+    public String getCategoryNameByCategoryId(Long categoryId) {
+    	return categoryRepository.findById(categoryId).getName();
+    }
+    
     public boolean isValidCategory(Long categoryId) {
         return categoryRepository.findById(categoryId) != null;
     }
