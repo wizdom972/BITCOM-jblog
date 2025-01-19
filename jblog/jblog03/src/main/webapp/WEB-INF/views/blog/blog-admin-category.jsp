@@ -26,7 +26,20 @@
                     
                     categories.forEach(function (category) {
                     	const description = category.description || "";
-                    	const isDefaultCategory = category.id === 1; // 기본 카테고리인지 확인
+                    	const isNotDefaultCategory = category.id !== 1; // 기본 카테고리가 아닌지 확인
+                    	
+                    	let deleteButtonHtml = "";
+                    	if (isNotDefaultCategory) {
+                    	    deleteButtonHtml = `
+                    	        <img 
+                    	            src="${"${contextPath}"}/assets/images/delete.jpg" 
+                    	            class="delete-btn" 
+                    	            data-id=${"${category.id}"} 
+                    	            alt="삭제" 
+                    	            style="cursor: pointer;"
+                    	        />
+                    	    `;
+                    	}
                     	
                         $("#categoryTable").append(`
                             <tr data-id=${"${category.id}"}>
@@ -34,15 +47,7 @@
                                 <td>${"${category.name}"}</td>
                                 <td>${"${category.postCount}"}</td>
                                 <td>${"${description}"}</td>
-                                <td>
-	                                <img 
-		                                src="${"${contextPath}"}/assets/images/delete.jpg" 
-		                                class="delete-btn" 
-		                                data-id=${"${category.id}"} 
-		                                alt="삭제" 
-		                                style="cursor: pointer;"
-	                            	/>
-                                </td>
+                                <td>${"${deleteButtonHtml}"}</td>
                             </tr>
                         `);
                     });
@@ -93,7 +98,7 @@
             const categoryId = $(this).data("id");
             console.log(categoryId);
 
-            if (!confirm("정말 삭제하시겠습니까?")) {
+            if (!confirm("카테고리를 삭제하면 해당 카테고리의 모든 포스트가 삭제됩니다.\n정말 삭제하시겠습니까?")) {
                 return;
             }
 

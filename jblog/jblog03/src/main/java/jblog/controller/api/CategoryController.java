@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,7 @@ import jblog.vo.CategoryVo;
 @RestController("categoryApiController")
 @RequestMapping("/api/category")
 public class CategoryController {
+	final Long DEFAULT_CATEGORY_ID = 1L;
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -43,6 +47,12 @@ public class CategoryController {
     // 카테고리 삭제
     @DeleteMapping("/{categoryId}")
     public Map<String, Object> deleteCategory(@PathVariable("categoryId") Long categoryId) {
+        
+    	// 기본 카테고리는 삭제 불가
+    	if (categoryId.equals(DEFAULT_CATEGORY_ID)) {
+            return Map.of("success", false, "message", "기본 카테고리는 삭제할 수 없습니다.");
+        }
+    	
         categoryService.deleteCategory(categoryId);
 
         return Map.of(

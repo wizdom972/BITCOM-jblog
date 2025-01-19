@@ -18,7 +18,7 @@
 		category
 		WHERE
 		blog_id = #{blogId}
-		ORDER BY id DESC
+		ORDER BY id ASC
 	]]>
 	</select>
 
@@ -38,7 +38,7 @@
 		c.blog_id = #{blogId}
 		GROUP BY
 		c.id
-		ORDER BY id DESC
+		ORDER BY id ASC
 	]]>
 	</select>
 
