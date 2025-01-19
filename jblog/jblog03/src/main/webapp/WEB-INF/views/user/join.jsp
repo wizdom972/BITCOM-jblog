@@ -8,6 +8,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script>
+$(function(){
+	$("#btn-checkemail").click(function() {
+		var id = $("#blog-id").val();
+		if(id == "") {
+			return;
+		}
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/api/user/checkid?id=" + id,
+			type: "get",
+			dataType: "json",
+			success: function(response) {
+				if(response.result != "success") {
+					return;
+				}
+				
+				if(response.exist) {
+					alert("이미 존재하는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+					$("#blog-id").val("");
+					$("#blog-id").focus();
+					
+					return;
+				}
+				
+				$("#img-checkemail").show();
+				$("#btn-checkemail").hide();
+			},
+			error: function(xhr, status, err) {
+				console.error(err);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 	<div class="center-content">

@@ -41,6 +41,10 @@ public class UserService {
         categoryVo.setDescription(null);
         categoryRepository.insert(categoryVo);
 	}
+	
+	public UserVo getUser(String id) {
+		return userRepository.findById(id);
+	}
 
 	public UserVo getUser(String id, String password) {
 		return userRepository.findByIdAndPassword(id, password);
