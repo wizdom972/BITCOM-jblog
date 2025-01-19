@@ -25,6 +25,10 @@ public class CategoryService {
     public List<Map<String, Object>> getCategoryWithPostCount(String blogId) {
         return categoryRepository.findCategoryWithPostCount(blogId);
     }
+    
+    public boolean isValidCategory(Long categoryId) {
+        return categoryRepository.findById(categoryId) != null;
+    }
 	
     public void addCategory(CategoryVo categoryVo) {
         categoryRepository.insert(categoryVo);

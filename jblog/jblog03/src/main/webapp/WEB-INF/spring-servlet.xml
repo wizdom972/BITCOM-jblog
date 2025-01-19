@@ -24,7 +24,7 @@
 
 	<!-- Validator, ConversionService, MessageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
-	
+
 		<!-- Message Converter -->
 		<mvc:message-converters>
 			<bean

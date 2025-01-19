@@ -38,4 +38,9 @@ public class PostService {
     public boolean deletePostsByCategoryId(Long categoryId) {
         return postRepository.deletePostsByCategoryId(categoryId) > 0;
     }
+    
+    // 존재하는 포스트 아이디인지 확인
+    public boolean isValidPost(Long postId) {
+        return postRepository.findPostById(postId) != null;
+    }
 }

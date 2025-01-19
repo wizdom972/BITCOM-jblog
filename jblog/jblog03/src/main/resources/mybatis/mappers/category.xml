@@ -8,6 +8,19 @@
 		VALUES (#{name}, #{description}, #{blogId})
 	]]>
 	</insert>
+	
+	<select id="findById" parameterType="long"
+		resultType="categoryvo">
+	<![CDATA[
+		SELECT
+		id, name, description, blog_id AS blogId
+		FROM
+		category
+		WHERE
+		id = #{categoryId}
+		ORDER BY id ASC
+	]]>
+	</select>
 
 	<select id="findByBlogId" parameterType="string"
 		resultType="categoryvo">

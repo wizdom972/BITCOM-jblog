@@ -12,6 +12,7 @@ import jblog.security.Auth;
 import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.PostService;
+import jblog.service.UserService;
 
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
@@ -25,6 +26,9 @@ public class BlogController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping({ "", "/", "/{path1}", "/{path1}/{path2}" })
 	public String main(
@@ -42,6 +46,17 @@ public class BlogController {
 		} else if (path1.isPresent()) {
 			categoryId = path1.get();
 		}
+		
+	    // 유효성 검사
+		if (!userService.isValidUser(id)) {
+			return "redirect:/error/id-not-found";  // 계정이 없는 경우
+		}
+	    if (categoryId != 0 && !categoryService.isValidCategory(categoryId)) {
+	        return "redirect:/error/category-not-found"; // 카테고리가 없는 경우
+	    }
+	    if (postId != 0 && !postService.isValidPost(postId)) {
+	        return "redirect:/error/post-not-found"; // 포스트가 없는 경우
+	    }
 
         model.addAttribute("blog", blogService.getBlog(id));
         model.addAttribute("categories", categoryService.getCategoriesByBlogId(id));

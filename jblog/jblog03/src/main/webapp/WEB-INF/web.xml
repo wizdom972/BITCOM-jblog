@@ -9,7 +9,7 @@
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		
+
 		<!-- 파일 업로드 설정 -->
 		<multipart-config>
 			<max-file-size>10485760</max-file-size>
@@ -32,5 +32,21 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<!-- Common Errors -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/views/errors/400.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/errors/404.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/errors/500.jsp</location>
+	</error-page>
 
 </web-app>
