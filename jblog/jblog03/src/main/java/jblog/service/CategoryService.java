@@ -14,6 +14,9 @@ public class CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private PostService postService;
 
 	public List<CategoryVo> getCategoriesByBlogId(String blogId) {
 		return categoryRepository.findByBlogId(blogId);
@@ -27,7 +30,9 @@ public class CategoryService {
         categoryRepository.insert(categoryVo);
     }
 
-    public void deleteCategory(Long categoryId) {
-        categoryRepository.delete(categoryId);
+    public boolean deleteCategory(Long categoryId) {
+    	postService.deletePostsByCategoryId(categoryId);
+    	
+        return categoryRepository.delete(categoryId);
     }
 }

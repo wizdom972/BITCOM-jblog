@@ -34,4 +34,8 @@ public class PostService {
         return postRepository.findPostById(postId);
     }
 
+    // 해당 카테고리의 모든 포스트들을 삭제하기
+    public boolean deletePostsByCategoryId(Long categoryId) {
+        return postRepository.deletePostsByCategoryId(categoryId) > 0;
+    }
 }

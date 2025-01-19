@@ -53,11 +53,19 @@ public class CategoryController {
             return Map.of("success", false, "message", "기본 카테고리는 삭제할 수 없습니다.");
         }
     	
+    	boolean isDeleted = categoryService.deleteCategory(categoryId);
+    	
         categoryService.deleteCategory(categoryId);
 
-        return Map.of(
-            "success", true,
-            "deletedCategoryId", categoryId
-        );
+        if (isDeleted) {
+            return Map.of(
+                    "success", true,
+                    "deletedCategoryId", categoryId
+                );
+        } else {
+            return Map.of(
+                    "success", false
+                );
+        }
     }   
 }

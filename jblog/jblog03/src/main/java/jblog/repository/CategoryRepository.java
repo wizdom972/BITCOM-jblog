@@ -27,7 +27,7 @@ public class CategoryRepository {
         return sqlSession.selectList("category.findCategoryWithPostCount", blogId);
     }
     
-    public void delete(Long categoryId) {
-        sqlSession.delete("category.delete", categoryId);
+    public boolean delete(Long categoryId) {
+        return sqlSession.delete("category.delete", categoryId) > 0;
     }
 }

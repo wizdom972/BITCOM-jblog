@@ -30,4 +30,8 @@ public class PostRepository {
     public PostVo findPostById(Long postId) {
         return sqlSession.selectOne("post.findPostById", postId);
     }
+
+	public int deletePostsByCategoryId(Long categoryId) {
+		return sqlSession.delete("post.deletePostsByCategoryId", categoryId);
+	}
 }

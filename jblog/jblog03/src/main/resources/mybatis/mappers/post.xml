@@ -53,4 +53,11 @@
         WHERE id = #{postId}
     ]]>
     </select>
+    
+    <!-- 카테고리에 해당하는 모든 포스트 삭제 -->
+    <delete id="deletePostsByCategoryId" parameterType="long">
+    <![CDATA[
+    	DELETE FROM post WHERE category_id = #{categoryId}
+    ]]>
+	</delete>
 </mapper>
