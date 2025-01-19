@@ -23,9 +23,9 @@ public class PostRepository {
         return sqlSession.selectList("post.findAllPostsByBlogId", blogId);
     }
     
-    public List<PostVo> findPostsByCategoryId(Long categoryId) {
-        return sqlSession.selectList("post.findPostsByCategoryId", categoryId);
-    }
+	public List<PostVo> findPostsByCategoryIdAndBlogId(Long categoryId, String blogId) {
+		return sqlSession.selectList("post.findPostsByCategoryIdAndBlogId", Map.of("categoryId", categoryId, "blogId", blogId));
+	}    
 
     public PostVo findPostById(Long postId) {
         return sqlSession.selectOne("post.findPostById", postId);
@@ -34,4 +34,5 @@ public class PostRepository {
 	public int deletePostsByCategoryId(Long categoryId) {
 		return sqlSession.delete("post.deletePostsByCategoryId", categoryId);
 	}
+
 }

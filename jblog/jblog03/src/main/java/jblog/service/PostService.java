@@ -25,8 +25,8 @@ public class PostService {
     }
     
     // 특정 카테고리의 모든 포스트 가져오기
-    public List<PostVo> getPostsByCategoryId(Long categoryId) {
-        return postRepository.findPostsByCategoryId(categoryId);
+    public List<PostVo> getPostsByCategoryIdAndBlogId(Long categoryId, String blogId) {
+        return postRepository.findPostsByCategoryIdAndBlogId(categoryId, blogId);
     }
     
     // 특정 포스트 가져오기

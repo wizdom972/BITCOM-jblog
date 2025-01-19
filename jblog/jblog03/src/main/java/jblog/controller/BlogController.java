@@ -67,7 +67,7 @@ public class BlogController {
             model.addAttribute("posts", postService.getAllPostsByBlogId(id));
         } else {
             // 특정 카테고리의 포스트 가져오기
-            model.addAttribute("posts", postService.getPostsByCategoryId(categoryId));
+            model.addAttribute("posts", postService.getPostsByCategoryIdAndBlogId(categoryId, id));
         }
         
         model.addAttribute("selectedPost", postService.getPostById(postId));
