@@ -26,7 +26,7 @@ public class BlogController {
 	@Autowired
 	private PostService postService;
 
-	@RequestMapping({ "", "/{path1}", "/{path1}/{path2}" })
+	@RequestMapping({ "", "/", "/{path1}", "/{path1}/{path2}" })
 	public String main(
 			@PathVariable("id") String id,
 			@PathVariable("path1") Optional<Long> path1,
@@ -45,7 +45,17 @@ public class BlogController {
 
         model.addAttribute("blog", blogService.getBlog(id));
         model.addAttribute("categories", categoryService.getCategoriesByBlogId(id));
-        model.addAttribute("posts", postService.getPostsByCategoryIdAndPostId(categoryId, postId));
+        
+        // 포스트 목록
+        if (categoryId == 0) {
+            // 모든 포스트 가져오기
+            model.addAttribute("posts", postService.getAllPostsByBlogId(id));
+        } else {
+            // 특정 카테고리의 포스트 가져오기
+            model.addAttribute("posts", postService.getPostsByCategoryId(categoryId));
+        }
+        
+        model.addAttribute("selectedPost", postService.getPostById(postId));
         model.addAttribute("selectedCategoryId", categoryId);
         model.addAttribute("selectedPostId", postId);
 

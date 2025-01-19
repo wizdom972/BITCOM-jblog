@@ -2,6 +2,7 @@
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
 <%@ taglib uri="jakarta.tags.functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<% pageContext.setAttribute( "newLine", "\n" ); %>
 <!doctype html>
 <html>
 <head>
@@ -18,26 +19,23 @@
 					<!-- 선택된 포스트의 내용 -->
 					<c:choose>
 						<c:when test="${not empty posts && selectedPostId != 0}">
-							<c:forEach var="post" items="${posts}">
-								<c:if test="${post.id == selectedPostId}">
-									<h4>${post.title}</h4>
-									<p>${fn:escapeXml(post.content)}</p>
-								</c:if>
-							</c:forEach>
+     					   	<h4>${selectedPost.title}</h4>
+        					<p>${fn:replace(selectedPost.contents, newLine, "<br>")}</p>
 						</c:when>
 						<c:otherwise>
 							<h4>포스트를 선택하세요</h4>
-							<p>카테고리에서 포스트를 선택해 내용을 확인하세요.</p>
+							<p>포스트를 선택해 내용을 확인하세요.</p>
+							<p>카테고리를 선택하면 해당 카테고리의 포스트 리스트만을 확인할 수 있습니다.</p>
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<ul class="blog-list">
 					<c:forEach var="post" items="${posts}">
 						<li>
-							<a href="${pageContext.request.contextPath}/${blog.blogId}/${selectedCategoryId}/${post.id}">
+							<a href="${pageContext.request.contextPath}/${blog.blogId}/${post.categoryId}/${post.id}">
 								${post.title}
 							</a> 
-							<span><fmt:formatDate value="${post.regDate}" pattern="yyyy/MM/dd" /></span>
+							<span>${post.regDate}</span>
 						</li>
 					</c:forEach>
 				</ul>

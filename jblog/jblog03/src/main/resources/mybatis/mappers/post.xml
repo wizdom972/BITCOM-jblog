@@ -3,17 +3,54 @@
 <mapper namespace="post">
 
 	<insert id="insert" parameterType="postvo" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[
 		INSERT INTO post (title, contents, category_id, reg_date)
 		VALUES (#{title}, #{contents}, #{categoryId}, NOW())
+	]]>
 	</insert>
-
-	<select id="findByCategoryAndPost" parameterType="map"
-		resultType="postvo">
-		SELECT id, title, contents
-		FROM post
-		WHERE category_id = #{categoryId}
-		<if test="postId != null and postId != 0">
-			AND id = #{postId}
-		</if>
+	
+	<!-- 모든 포스트 가져오기 -->
+	<select id="findAllPostsByBlogId" parameterType="string" resultType="postvo">
+	<![CDATA[
+	    SELECT 
+	        p.id, 
+	        p.title, 
+	        p.contents, 
+	        DATE_FORMAT(p.reg_date, '%Y-%m-%d %H:%i:%s') AS regDate, 
+	        p.category_id AS categoryId
+	    FROM post p
+	    INNER JOIN category c ON p.category_id = c.id
+	    WHERE c.blog_id = #{blogId}
+	    ORDER BY p.reg_date DESC
+	]]>
 	</select>
+
+	<!-- 특정 카테고리의 모든 포스트 -->
+    <select id="findPostsByCategoryId" parameterType="long" resultType="postvo">
+    <![CDATA[
+        SELECT 
+        	id, 
+        	title, 
+        	contents, 
+        	DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') AS regDate, 
+        	category_id AS categoryId
+        FROM post
+        WHERE category_id = #{categoryId}
+        ORDER BY reg_date DESC
+    ]]>
+    </select>
+
+    <!-- 특정 포스트 가져오기 -->
+    <select id="findPostById" parameterType="long" resultType="postvo">
+    <![CDATA[
+        SELECT 
+        	id, 
+        	title, 
+        	contents, 
+        	DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') AS regDate, 
+        	category_id AS categoryId
+        FROM post
+        WHERE id = #{postId}
+    ]]>
+    </select>
 </mapper>

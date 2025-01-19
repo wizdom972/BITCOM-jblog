@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import jblog.service.PostService;
 import jblog.vo.PostVo;
+import jblog.vo.UserVo;
 
 @Controller
 @RequestMapping("/api/post")
@@ -20,16 +22,13 @@ public class PostController {
     @PostMapping
     public String createPost(
             @ModelAttribute PostVo postVo,
-            RedirectAttributes redirectAttributes) {
+            HttpSession session) {
     	
-        boolean isCreated = postService.createPost(postVo);
+    	UserVo authUser = (UserVo) session.getAttribute("authUser");
+  	    String blogId = authUser.getId();
+    	
+  	    postService.createPost(postVo);
         
-        if (isCreated) {
-            redirectAttributes.addFlashAttribute("message", "글이 성공적으로 작성되었습니다.");
-        } else {
-            redirectAttributes.addFlashAttribute("message", "글 작성 중 문제가 발생했습니다.");
-        }
-        
-        return "redirect:/" + postVo.getCategoryId() + "/" + postVo.getId();
+        return "redirect:/" + blogId + "/" + postVo.getCategoryId() + "/" + postVo.getId();
     }
 }

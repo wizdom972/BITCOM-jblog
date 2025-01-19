@@ -19,7 +19,19 @@ public class PostService {
         return postRepository.insertPost(postVo) > 0;
     }
     
-    public List<PostVo> getPostsByCategoryIdAndPostId(Long categoryId, Long postId) {
-        return postRepository.findByCategoryAndPost(categoryId, postId);
+    // 모든 포스트 가져오기
+    public List<PostVo> getAllPostsByBlogId(String blogId) {
+        return postRepository.findAllPostsByBlogId(blogId);
     }
+    
+    // 특정 카테고리의 모든 포스트 가져오기
+    public List<PostVo> getPostsByCategoryId(Long categoryId) {
+        return postRepository.findPostsByCategoryId(categoryId);
+    }
+    
+    // 특정 포스트 가져오기
+    public PostVo getPostById(Long postId) {
+        return postRepository.findPostById(postId);
+    }
+
 }

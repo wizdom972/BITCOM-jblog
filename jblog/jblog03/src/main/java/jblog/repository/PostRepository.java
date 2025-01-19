@@ -19,7 +19,15 @@ public class PostRepository {
         return sqlSession.insert("post.insert", postVo);
     }
     
-    public List<PostVo> findByCategoryAndPost(Long categoryId, Long postId) {
-        return sqlSession.selectList("post.findByCategoryAndPost", Map.of("categoryId", categoryId, "postId", postId));
+    public List<PostVo> findAllPostsByBlogId(String blogId) {
+        return sqlSession.selectList("post.findAllPostsByBlogId", blogId);
+    }
+    
+    public List<PostVo> findPostsByCategoryId(Long categoryId) {
+        return sqlSession.selectList("post.findPostsByCategoryId", categoryId);
+    }
+
+    public PostVo findPostById(Long postId) {
+        return sqlSession.selectOne("post.findPostById", postId);
     }
 }

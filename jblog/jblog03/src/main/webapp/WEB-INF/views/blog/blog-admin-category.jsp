@@ -26,6 +26,7 @@
                     
                     categories.forEach(function (category) {
                     	const description = category.description || "";
+                    	const isDefaultCategory = category.id === 1; // 기본 카테고리인지 확인
                     	
                         $("#categoryTable").append(`
                             <tr data-id=${"${category.id}"}>
@@ -34,7 +35,13 @@
                                 <td>${"${category.postCount}"}</td>
                                 <td>${"${description}"}</td>
                                 <td>
-                                    <button class="delete-btn" data-id=${"${category.id}"}>삭제</button>
+	                                <img 
+		                                src="${"${contextPath}"}/assets/images/delete.jpg" 
+		                                class="delete-btn" 
+		                                data-id=${"${category.id}"} 
+		                                alt="삭제" 
+		                                style="cursor: pointer;"
+	                            	/>
                                 </td>
                             </tr>
                         `);

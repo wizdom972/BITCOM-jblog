@@ -6,7 +6,7 @@ public class PostVo {
 	private Long id;
 	private String title;
 	private String contents;
-	private LocalDateTime regDate;
+	private String regDate;
 	private String blogId;
 	private Long categoryId;
 
@@ -34,11 +34,11 @@ public class PostVo {
 		this.contents = contents;
 	}
 
-	public LocalDateTime getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(LocalDateTime regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 	
