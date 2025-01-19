@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div id="header">
-	<h1>${blog.title}</h1>
+	<h1><a href="${pageContext.request.contextPath}/${blog.blogId}" >${blog.title}</a></h1>
 	<ul>
 		<c:choose>
 			<%-- 비로그인 사용자 --%>
@@ -16,7 +16,7 @@
 			<%-- 로그인한 사용자 --%>
 			<c:otherwise>
 				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-				<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/basic">블로그 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/${blog.blogId}/admin/basic">블로그 관리</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

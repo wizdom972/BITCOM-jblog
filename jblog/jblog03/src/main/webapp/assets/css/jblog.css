@@ -7,7 +7,7 @@ fieldset		{ border:none }
 
 a:link 			{ color:#696969; text-decoration:none; font-weight:bold; }
 a:visited 		{ color:#696969; text-decoration:none; font-weight:bold; }
-a:active 		{ color:#696969; text-decoration:none; font-weight:bold; }
+a:active 		{ color:#696969FF; text-decoration:none; font-weight:bold; }
 a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; } 
 
 
@@ -56,14 +56,17 @@ div#footer					{ clear:both; width:100% }
 
 /* header */
 div#header h1		{ text-align:center; line-height:100px; margin:0; color:#fff }
+div#header h1 a		{ text-align:center; line-height:100px; margin:0; color:#fff }
 div#header ul		{ height:20px } 
 div#header li		{ float:right; margin-right:10px; }
 div#header li a 	{ color:#fff; font-weight:bold; text-decoration:none; }
 
+/*
 #header h1 a:hover	 { color:#79B30B; text-decoration:none  }
 #header h1 a:link	 { color:#79B30B; text-decoration:none  }
 #header h1 a:visited { color:#79B30B; text-decoration:none  }
 #header h1 a:active  { color:#79B30B; text-decoration:none  }
+*/
 
 div#container		{ text-align:left }
 
@@ -76,6 +79,7 @@ div#content .blog-list		{ margin:20px 0 10px 10px }
 .blog-list 					{ width:100% }
 .blog-list li				{ height:20px; clear:both; }
 .blog-list li a				{ display:block; float:left }
+.blog-list li a.selected	{ display:block; float:left; font-weight:bold; text-decoration: underline; }
 .blog-list li span			{ display:block; float:right; margin-right:30px }
 
 /* admin content */
@@ -112,6 +116,7 @@ div#navigation h2						{ font-size:1.0em }
 div#navigation ul						{ margin-top:5px; margin-bottom:10px }
 div#navigation ul li					{ padding:2px 0 }
 div#navigation ul a						{ font-weight:normal }
+div#navigation ul a.selected 			{ font-weight: bold; text-decoration: underline; }
 
 
 /* extra */

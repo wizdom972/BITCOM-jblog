@@ -32,7 +32,8 @@
 				<ul class="blog-list">
 					<c:forEach var="post" items="${posts}">
 						<li>
-							<a href="${pageContext.request.contextPath}/${blog.blogId}/${post.categoryId}/${post.id}">
+							<a href="${pageContext.request.contextPath}/${blog.blogId}/${post.categoryId}/${post.id}"
+								class="${post.id == selectedPostId ? 'selected' : ''}">
 								${post.title}
 							</a> 
 							<span>${post.regDate}</span>
@@ -53,7 +54,8 @@
 			<ul>
 				<c:forEach var="category" items="${categories}">
 					<li>
-						<a href="${pageContext.request.contextPath}/${blog.blogId}/${category.id}">
+						<a href="${pageContext.request.contextPath}/${blog.blogId}/${category.id}"
+							class="${category.id == selectedCategoryId ? 'selected' : ''}">
 							${category.name}
 						</a>
 					</li>
